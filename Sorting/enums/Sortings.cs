@@ -34,5 +34,7 @@ namespace Sorting.enums
         [Description("HEAPSORT")]
         HEAPSORT = 10,
 
+        [Description("NONE")]
+        NONE = 11,
     }
 }

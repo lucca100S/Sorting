@@ -1,13 +1,15 @@
 ﻿using Sorting.enums;
 using Sorting.sorting.simple;
+using Sorting.sorting.efficient;
+using Sorting.sorting.specials;
 
 namespace Sorting.manager
 {
     class ManagerFileSorting
     {
-        public static void Ordenar(Sortings algoritmo, int[] vet)
+        public static int[] Ordenar(Sortings algoritmo, int[] vet)
         {
-            int[] ordenado;
+            int[] ordenado = vet;
 
             switch (algoritmo)
             {
@@ -27,23 +29,31 @@ namespace Sorting.manager
                     break;
 
                 case Sortings.COUNTINGSORT:
+                    ordenado = CountingSort.Sorting(vet);
                     break;
 
                 case Sortings.RADIXSORT:
+                    ordenado = RadixSort.Sorting(vet);
                     break;
 
                 case Sortings.SHELLSORT:
+                    ordenado = ShellSort.Sorting(vet);
                     break;
 
                 case Sortings.QUICKSORT:
+                    ordenado = QuickSort.Sorting(vet, 0, vet.Length - 1);
                     break;
 
                 case Sortings.MERGESORT:
+                    ordenado = MergeSort.Sorting(vet, 0, vet.Length - 1);
                     break;
 
                 case Sortings.HEAPSORT:
+                    ordenado = HeapSort.Sorting(vet);
                     break;
             }
+
+            return ordenado;
         }
     }
 }
