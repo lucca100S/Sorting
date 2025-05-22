@@ -7,53 +7,67 @@ namespace Sorting.manager
 {
     class ManagerFileSorting
     {
-        public static int[] Ordenar(Sortings algoritmo, int[] vet)
+        public static (int[], long, long, long) Ordenar(Sortings algoritmo, int[] vet)
         {
             int[] ordenado = vet;
-
+            long countComparacao = 0;
+            long countAtribuicoes = 0;
+            long countTrocas = 0;
             switch (algoritmo)
             {
                 case Sortings.BUBBLESORT:
-                    ordenado = BubbleSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = BubbleSort.Sorting(vet);
                     break;
 
                 case Sortings.SELECTIONSORT:
-                    ordenado = SelectionSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = SelectionSort.Sorting(vet);
                     break;
 
                 case Sortings.INSERTIONSORT:
-                    ordenado = InsertionSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = InsertionSort.Sorting(vet);
                     break;
 
                 case Sortings.BUCKETSORT:
                     break;
 
                 case Sortings.COUNTINGSORT:
-                    ordenado = CountingSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = CountingSort.Sorting(vet);
                     break;
 
                 case Sortings.RADIXSORT:
-                    ordenado = RadixSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = RadixSort.Sorting(vet);
                     break;
 
                 case Sortings.SHELLSORT:
-                    ordenado = ShellSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = ShellSort.Sorting(vet);
                     break;
 
                 case Sortings.QUICKSORT:
-                    ordenado = QuickSort.Sorting(vet, 0, vet.Length - 1);
+                    // Inicializa contagem
+                    QuickSort.countComparacao = 0; 
+                    QuickSort.countAtribuicoes = 0;
+                    QuickSort.countTrocas = 0;
+
+                    // Ordenacao
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = QuickSort.Sorting(vet, 0, vet.Length - 1);
                     break;
 
                 case Sortings.MERGESORT:
-                    ordenado = MergeSort.Sorting(vet, 0, vet.Length - 1);
+                    // Inicializa contagem
+                    MergeSort.countComparacao = 0; 
+                    MergeSort.countAtribuicoes = 0;
+                    MergeSort.countTrocas = 0;
+
+                    // Ordenacao
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = MergeSort.Sorting(vet, 0, vet.Length - 1);
                     break;
 
                 case Sortings.HEAPSORT:
-                    ordenado = HeapSort.Sorting(vet);
+                    (ordenado, countComparacao, countAtribuicoes, countTrocas) = HeapSort.Sorting(vet);
                     break;
             }
 
-            return ordenado;
+            return (ordenado, countComparacao, countAtribuicoes, countTrocas);
         }
     }
 }

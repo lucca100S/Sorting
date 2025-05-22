@@ -1,4 +1,6 @@
-﻿using Sorting.manager;
+﻿using System;
+using System.Diagnostics;
+using Sorting.manager;
 using Sorting.print;
 
 public class Program
@@ -50,9 +52,8 @@ public class Program
                                   "5 - Merge sort\n" +
                                   "6 - Quick sort\n" +
                                   "7 - Shell sort\n" +
-                                  "8 - Bucket sort\n" +
-                                  "9 - Counting sort\n" +
-                                  "10 - RadixSort");
+                                  "8 - Counting sort\n" +
+                                  "9 - RadixSort");
 
                     int y = int.Parse(Console.ReadLine());
 
@@ -81,12 +82,9 @@ public class Program
                             sorting = Sorting.enums.Sortings.SHELLSORT;
                             break;
                         case 8:
-                            sorting = Sorting.enums.Sortings.BUCKETSORT;
-                            break;
-                        case 9:
                             sorting = Sorting.enums.Sortings.COUNTINGSORT;
                             break;
-                        case 10:
+                        case 9:
                             sorting = Sorting.enums.Sortings.RADIXSORT;
                             break;
                         default:
@@ -126,8 +124,28 @@ public class Program
 
             if (vet.Length > 0 && sorting != Sorting.enums.Sortings.NONE)
             {
-                Console.WriteLine(sorting.ToString());
-                int[] ordenado = ManagerFileSorting.Ordenar(sorting, vet);
+                // Inicia relogio
+                Console.WriteLine($"Ordenação iniciada: {DateTime.Now}");
+                Stopwatch stopwatch = Stopwatch.StartNew();
+
+                // Ordenacao
+                var (ordenado, countComparacao, countAtribuicoes, countTrocas) = ManagerFileSorting.Ordenar(sorting, vet);
+
+                // Para relogio
+                stopwatch.Stop();
+                Console.WriteLine($"Ordenação finalizada: {DateTime.Now}");
+                Console.WriteLine($"Tempo de execução: {stopwatch.Elapsed}");
+
+                // Imprime numero de comparacoes
+                Console.WriteLine($"Numero de comparações: {countComparacao}");
+
+                // Imprime numero de atribuicoes
+                Console.WriteLine($"Numero de atribuições: {countAtribuicoes}");
+
+                // Imprime numero de atribuicoes
+                Console.WriteLine($"Numero de trocas: {countTrocas}");
+
+                // Imprime vetor ordenado
                 PrintSolutionStatic.ImprimirArrayMesmaLinha(ordenado, sorting);
             }
 

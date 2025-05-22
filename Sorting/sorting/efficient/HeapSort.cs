@@ -2,9 +2,15 @@
 {
     class HeapSort
     {
+        static long countComparacao;
+        static long countAtribuicoes;
+        static long countTrocas;
 
-        public static int[] Sorting(int[] vet)
+        public static (int[], long, long, long) Sorting(int[] vet)
         {
+            countComparacao = 0;
+            countAtribuicoes = 0;
+            countTrocas = 0;
             ConstruirMaxHeap(vet);
             for (int i = vet.Length - 1; i > 0; i--)
             {
@@ -12,7 +18,7 @@
                 Heapify(vet, i, 0);
             }
 
-            return vet;
+            return (vet, countComparacao, countAtribuicoes, countTrocas);
         }
 
         public static void ConstruirMaxHeap(int[] vet)
@@ -30,6 +36,7 @@
 
             int max;
 
+            ContarComparacao();
             if ((left < size) && (vet[left] > vet[i]))
             {
                 max = left;
@@ -39,6 +46,7 @@
                 max = i;
             }
 
+            ContarComparacao();
             if ((right < size) && (vet[right] > vet[max]))
             {
                 max = right;
@@ -51,57 +59,29 @@
             }
         }
 
-
-        public static void Construir(int[] vet, int tam)
-        {
-            for (int i = tam; i > 1 && vet[i] > vet[i/2]; i/= 2)
-            {
-                Trocar(vet, i, i / 2);
-            }
-        }
-
-        public static void Reconstruir(int[] vet, int tam)
-        {
-            int i = 1;
-            while(HasFilho(i, tam) == true)
-            {
-                int filho = GetMaiorFilho(vet, i, tam);
-                if (vet[i] < vet[filho])
-                {
-                    Trocar(vet, i, filho);
-                    i = filho;
-                }
-                else
-                {
-                    i = tam;
-                }
-            }
-        }
-
-        public static bool HasFilho(int i, int tam)
-        {
-            return i <= (tam / 2);
-        }
-
-        public static int GetMaiorFilho(int[] vet, int i, int tam)
-        {
-            int filho;
-            if (2*i == tam || vet[2*i] > vet[2*i + 1])
-            {
-                filho = 2 * i;
-            }
-            else
-            {
-                filho = 2 * i + 1;
-            }
-            return filho;
-        }
-
         public static void Trocar(int[] vet, int i, int j)
         {
             int tmp = vet[i];
             vet[i] = vet[j];
             vet[j] = tmp;
+
+            ContarTrocas();
+            ContarAtribuicao(3);
+        }
+
+        public static void ContarComparacao()
+        {
+            countComparacao++;
+        }
+
+        public static void ContarAtribuicao(int soma)
+        {
+            countAtribuicoes += soma;
+        }
+
+        public static void ContarTrocas()
+        {
+            countTrocas++;
         }
     }
 }
