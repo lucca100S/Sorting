@@ -26,6 +26,21 @@
             }
         }
 
+        public bool InserirPilha(int[] dados)
+        {
+            if (pilha.Length == dados.Length)
+            {
+                pilha = dados;
+                topo = pilha.Length - 1;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Vetor de dados não tem o mesmo tamanho q a pilha. Tente novamente");
+                return false;
+            }
+        }
+
         public int Remover()
         {
             if (topo != -1)

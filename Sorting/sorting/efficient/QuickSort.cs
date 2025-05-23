@@ -9,7 +9,7 @@ namespace Sorting.sorting.efficient
         public static long countAtribuicoes;
         public static long countTrocas;
 
-        public static (int[], long, long, long) Sorting(int[] vet, int esq, int dir)
+        public static (int[] Ordenado, long, long, long) Sorting(int[] vet, int esq, int dir)
         {
             int i = esq;
             int j = dir;

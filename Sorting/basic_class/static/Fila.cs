@@ -25,6 +25,22 @@
             }
         }
 
+        public bool InserirFila(int[] dados)
+        {
+            if (fila.Length == dados.Length)
+            {
+                fila = dados;
+                cont = fila.Length;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Vetor de dados não tem o mesmo tamanho q a fila. Tente novamente");
+                return false;
+            }
+            
+        }
+
         public int Remover()
         {
             int tmp = fila[0];
